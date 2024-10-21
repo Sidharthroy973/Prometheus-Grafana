@@ -1,0 +1,17 @@
+sudo apt update
+sudo apt install apt-transport-https --yes
+sudo apt install curl --yes
+
+curl https://baltocdn.com/helm/signing.asc | sudo tee /etc/apt/trusted.gpg.d/helm.asc
+
+echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+
+sudo apt update
+sudo apt install helm
+
+helm version
+
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+helm search repo grafana
+helm install grafana grafana/grafana --namespace monitoring --create-namespace
